@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde Física - ODS 3</title>
+    <link rel="stylesheet" href="/css/fisica.css" />
+</head>
+<body>
+    
+    <!-- Cabeçalho de Navegação Flutuante -->
+    <header class="cabecalho">
+        <div class="navegacao">
+            <a href="index.html">início</a>
+            <a href="mental.html">mental</a>
+            <a href="fisica.html" class="ativo">física</a>
+        </div>
+    </header>
+
+    <!-- Container do Questionário Físico -->
+    <main class="formulario-container">
+        <div class="formulario-header">
+            <span class="tag-ods">ODS 3 • Avaliação</span>
+            <h2>Questionário de Saúde Física</h2>
+            <p>Responda às perguntas pensando em como têm sido seus hábitos ultimamente para avaliarmos seu bem-estar físico.</p>
+        </div>
+
+        <form id="quizFisica" onsubmit="calcularResultadoFisico(event)">
+            <!-- Nome -->
+            <div class="campo-grupo">
+                <label for="nomeFisica">Digite seu nome:</label>
+                <input type="text" id="nomeFisica" required placeholder="Seu nome aqui">
+            </div>
+
+            <div class="secao-titulo">Dados Físicos</div>
+
+            <div class="campo-grupo">
+                <label for="idadeFisica">Digite sua idade:</label>
+                <input type="number" id="idadeFisica" required min="1" max="120" placeholder="Ex: 25">
+            </div>
+
+            <div class="campo-grupo">
+                <label for="pesoFisica">Digite seu peso em kg:</label>
+                <input type="number" id="pesoFisica" required step="0.1" min="1" max="300" placeholder="Ex: 70.5">
+            </div>
+
+            <div class="campo-grupo">
+                <label for="alturaFisica">Digite sua altura em metros:</label>
+                <input type="number" id="alturaFisica" required step="0.01" min="0.5" max="2.5" placeholder="Ex: 1.75">
+            </div>
+
+            <div class="secao-titulo">Alimentação</div>
+
+            <div class="campo-grupo">
+                <label for="frutasFisica">Você costuma comer frutas durante a semana?</label>
+                <select id="frutasFisica" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="verdurasFisica">Você costuma comer verduras e legumes?</label>
+                <select id="verdurasFisica" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <div class="secao-titulo">Hidratação</div>
+
+            <div class="campo-grupo">
+                <label for="aguaFisica">Quantos copos de água você costuma beber por dia?</label>
+                <input type="number" id="aguaFisica" required min="0" placeholder="Ex: 8">
+            </div>
+
+            <div class="secao-titulo">Atividade Física</div>
+
+            <div class="campo-grupo">
+                <label for="exercicioFisica">Você pratica algum tipo de atividade física?</label>
+                <select id="exercicioFisica" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <div class="secao-titulo">Sono</div>
+
+            <div class="campo-grupo">
+                <label for="sonoFisica">Quantas horas você costuma dormir por noite?</label>
+                <input type="number" id="sonoFisica" required step="0.5" min="0" max="24" placeholder="Ex: 8">
+            </div>
+
+            <div class="secao-titulo">Alimentação Equilibrada</div>
+
+            <div class="campo-grupo">
+                <label for="ultraFisica">Você costuma consumir muitos alimentos ultraprocessados?</label>
+                <select id="ultraFisica" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <div class="secao-titulo">Cuidados com a Saúde</div>
+
+            <div class="campo-grupo">
+                <label for="consultasFisica">Você costuma realizar consultas quando necessário?</label>
+                <select id="consultasFisica" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-enviar">Ver Resultado</button>
+        </form>
+
+        <!-- Bloco de Resposta (Inicia Oculto) -->
+        <div id="caixaResultadoFisica" class="caixa-resultado" style="display: none;">
+            <div class="resultado-titulo" id="boasVindasFisica"></div>
+            <div class="bloco-imc" id="blocoImcTexto"></div>
+            <div class="resultado-pontos" id="pontuacaoTextoFisica"></div>
+            <div id="textoDiagnosticoFisica" style="margin: 10px 0;"></div>
+            <ul class="recomendacoes-lista" id="listaRecomendacoesFisica"></ul>
+            
+            <div class="aviso-importante">
+                <strong>IMPORTANTE:</strong> Este questionário é apenas educativo. Ele não realiza diagnóstico médico e não substitui uma avaliação profissional.<br><br>
+                <span style="color: #4ade80; font-weight: bold;">ODS 3 - Saúde e Bem-Estar</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPT DE LÓGICA -->
+    <script>
+        let ultimoScroll = 0;
+        window.addEventListener('scroll', () => {
+            const cabecalho = document.querySelector('.cabecalho');
+            if (!cabecalho) return;
+            const scrollAtual = window.pageYOffset;
+            if (scrollAtual > ultimoScroll && scrollAtual > 100) {
+                cabecalho.classList.add('cabecalho-escondido');
+            } else if (scrollAtual < ultimoScroll) {
+                cabecalho.classList.remove('cabecalho-escondido');
+            }
+            ultimoScroll = scrollAtual;
+        });
+
+        function calcularResultadoFisico(event) {
+            event.preventDefault();
+            
+            const nome = document.getElementById('nomeFisica').value;
+            const idade = parseInt(document.getElementById('idadeFisica').value);
+            const peso = parseFloat(document.getElementById('pesoFisica').value);
+            const altura = parseFloat(document.getElementById('alturaFisica').value);
+            
+            const imc = peso / (altura * altura);
+            const imcFormatado = imc.toFixed(2);
+            
+            let textoIMC = `<strong>Seu IMC é: ${imcFormatado}</strong><br>O IMC é apenas uma referência informativa e não avalia sozinho a saúde corporal.<br><br>`;
+            
+            if (idade < 18) {
+                textoIMC += "Como você tem menos de 18 anos, o IMC precisa ser interpretado considerando idade e sexo por um profissional de saúde.";
+            } else {
+                if (imc < 18.5) {
+                    textoIMC += "O resultado está abaixo da faixa considerada adequada para adultos.";
+                } else if (imc < 25) {
+                    textoIMC += "O resultado está dentro da faixa considerada adequada para adultos.";
+                } else if (imc < 30) {
+                    textoIMC += "O resultado está levemente acima da faixa considerada adequada para adultos.";
+                } else {
+                    textoIMC += "O resultado está acima da faixa considerada adequada para adultos.";
+                }
+            }
+            
+            let pontuacao = 0;
+            let recomendacoes = [];
+            
+            if (parseInt(document.getElementById('frutasFisica').value) >= 2) {
+                pontuacao += 1;
+            } else {
+                recomendacoes.push("Tente incluir mais frutas no seu dia a dia.");
+            }
+
+            if (parseInt(document.getElementById('verdurasFisica').value) >= 2) {
+                pontuacao += 1;
+            } else {
+                recomendacoes.push("Aumente o consumo de verduras e legumes nas refeições.");
+            }
+            
+            const agua = parseInt(document.getElementById('aguaFisica').value);
+            if (agua >= 6) {
+                textoIMC += "<br><br><strong>Hidratação:</strong> Sua hidratação parece estar presente na rotina.";
+                pontuacao += 1;
+            } else {
+                textoIMC += "<br><br><strong>Hidratação:</strong> Sua hidratação pode merecer mais atenção. Tente beber água regularmente.";
+                recomendacoes.push("Procure beber pelo menos 6 a 8 copos de água por dia.");
+            }
+            
+            if (parseInt(document.getElementById('exercicioFisica').value) >= 2) {
+                pontuacao += 1;
+            } else {
+                recomendacoes.push("Busque praticar alguma atividade física com regularidade.");
+            }
+            
+            const sono = parseFloat(document.getElementById('sonoFisica').value);
+            if (sono >= 8) {
+                pontuacao += 1;
+            } else {
+                recomendacoes.push("Tente dormir em torno de 7 a 8 horas por noite para melhorar sua recuperação.");
+            }
+            
+            if (parseInt(document.getElementById('ultraFisica').value) <= 1) {
+                pontuacao += 1;
+            } else {
+                recomendacoes.push("Reduza o consumo de alimentos ultraprocessados.");
+            }
+
+            if (parseInt(document.getElementById('consultasFisica').value) >= 2) {
+                pontuacao += 1;
+            } else {
+                recomendacoes.push("Mantenha seus exames e consultas de rotina em dia.");
+            }
+            
+            const caixa = document.getElementById('caixaResultadoFisica');
+            caixa.style.display = 'block';
+            
+            document.getElementById('boasVindasFisica').innerHTML = `Olá, ${nome}!<br><span style='font-size:13px; font-weight:normal; color:#94a3b8;'>Idade: ${idade} anos</span>`;
+            document.getElementById('blocoImcTexto').innerHTML = textoIMC;
+            document.getElementById('pontuacaoTextoFisica').innerHTML = `<strong>Pontuação de Hábitos Saudáveis:</strong> ${pontuacao} de 7`;
+            document.getElementById('textoDiagnosticoFisica').innerHTML = pontuacao >= 5 
+                ? "Parabéns! Seus hábitos demonstram um ótimo cuidado com a saúde física." 
+                : "Existem pontos importantes na sua rotina que podem ser melhorados para o seu bem-estar geral.";
+
+            const listaUl = document.getElementById('listaRecomendacoesFisica');
+            listaUl.innerHTML = "";
+            if (recomendacoes.length > 0) {
+                recomendacoes.forEach(rec => {
+                    const li = document.createElement('li');
+                    li.textContent = rec;
+                    listaUl.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = "Continue mantendo esses excelentes hábitos de vida!";
+                listaUl.appendChild(li);
+            }
+
+            caixa.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

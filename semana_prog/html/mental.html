@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde Mental - ODS 3</title>
+    <link rel="stylesheet" href="/css/mental.css" />
+</head>
+<body>
+    
+    <!-- Cabeçalho de Navegação Flutuante -->
+    <header class="cabecalho">
+        <div class="navegacao">
+            <a href="index.html">início</a>
+            <a href="mental.html" class="ativo">mental</a>
+            <a href="fisica.html">física</a>
+        </div>
+    </header>
+
+    <!-- Container do Questionário Mental -->
+    <main class="formulario-container">
+        <div class="formulario-header">
+            <span class="tag-ods">ODS 3 • Avaliação</span>
+            <h2>Questionário de Saúde Mental</h2>
+            <p>Responda às perguntas pensando em como você tem se sentido ultimamente para refletirmos sobre o seu bem-estar emocional.</p>
+        </div>
+
+        <form id="quizMental" onsubmit="calcularResultado(event)">
+            <!-- Nome -->
+            <div class="campo-grupo">
+                <label for="nome">Digite seu nome:</label>
+                <input type="text" id="nome" required placeholder="Seu nome aqui">
+            </div>
+
+            <div class="secao-titulo">Autoavaliação Emocional</div>
+
+            <!-- Pergunta 1 -->
+            <div class="campo-grupo">
+                <label>1. Você tem se sentido muito cansado(a) ou sem energia?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="campo-grupo">
+                <label>2. Você tem tido dificuldade para dormir?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="campo-grupo">
+                <label>3. Você tem se sentido triste ou desanimado(a)?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="campo-grupo">
+                <label>4. Você tem tido dificuldade para se concentrar?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="campo-grupo">
+                <label>5. Você tem se sentido muito preocupado(a) ou ansioso(a)?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <!-- Pergunta 6 -->
+            <div class="campo-grupo">
+                <label>6. Você tem evitado conversar ou ficar perto de outras pessoas?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <!-- Pergunta 7 -->
+            <div class="campo-grupo">
+                <label>7. Você tem perdido o interesse em atividades que antes gostava?</label>
+                <select class="pergunta" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="0">0 = Nunca</option>
+                    <option value="1">1 = Às vezes</option>
+                    <option value="2">2 = Frequentemente</option>
+                    <option value="3">3 = Sempre</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-enviar">Ver Resultado</button>
+        </form>
+
+        <!-- Bloco de Resposta gerado dinamicamente -->
+        <div id="caixaResultado" class="caixa-resultado" style="display: none;">
+            <div class="resultado-titulo" id="boasVindas"></div>
+            <div class="resultado-pontos" id="pontuacaoTexto"></div>
+            <div id="textoDiagnostico" style="margin: 10px 0; line-height: 1.6; color: #cbd5e1;"></div>
+            <ul class="recomendacoes-lista" id="listaRecomendacoes"></ul>
+            
+            <div class="aviso-importante">
+                <strong>IMPORTANTE:</strong> Este questionário não é um diagnóstico médico. Ele serve apenas como uma ferramenta de reflexão para o seu autocuidado.<br><br>
+                <span style="color: #4ade80; font-weight: bold;">ODS 3 - Saúde e Bem-Estar</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPT DE LÓGICA E ANIMAÇÕES -->
+    <script>
+        // Animação de esconder/mostrar cabeçalho ao rolar a página
+        let ultimoScroll = 0;
+        window.addEventListener('scroll', () => {
+            const cabecalho = document.querySelector('.cabecalho');
+            if (!cabecalho) return;
+            const scrollAtual = window.pageYOffset;
+            if (scrollAtual > ultimoScroll && scrollAtual > 100) {
+                cabecalho.classList.add('cabecalho-escondido');
+            } else if (scrollAtual < ultimoScroll) {
+                cabecalho.classList.remove('cabecalho-escondido');
+            }
+            ultimoScroll = scrollAtual;
+        });
+
+        function calcularResultado(event) {
+            event.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const perguntas = document.querySelectorAll('.pergunta');
+            let pontuacao = 0;
+
+            perguntas.forEach(select => {
+                pontuacao += parseInt(select.value);
+            });
+
+            const caixa = document.getElementById('caixaResultado');
+            caixa.style.display = 'block';
+
+            document.getElementById('boasVindas').innerText = "Olá, " + nome + "!";
+            document.getElementById('pontuacaoTexto').innerText = "Sua pontuação de reflexão mental foi: " + pontuacao + " de 21 pontos.";
+
+            const textoDiagnostico = document.getElementById('textoDiagnostico');
+            const lista = document.getElementById('listaRecomendacoes');
+            lista.innerHTML = ""; 
+
+            if (pontuacao <= 5) {
+                textoDiagnostico.innerHTML = "<strong>Seu resultado indica um bom nível de bem-estar emocional no momento.</strong><br>Cuidado recomendado: continue mantendo seus hábitos saudáveis e de lazer.";
+                lista.innerHTML += "<li>Tenha uma rotina de sono adequada</li>";
+                lista.innerHTML += "<li>Pratique atividades físicas regularmente</li>";
+                lista.innerHTML += "<li>Reserve um tempo para momentos de lazer</li>";
+                lista.innerHTML += "<li>Mantenha contato com pessoas queridas</li>";
+            } else if (pontuacao <= 12) {
+                textoDiagnostico.innerHTML = "<strong>Seu resultado indica que você pode estar passando por alguns momentos de desgaste emocional.</strong><br>Cuidado recomendado: dê mais atenção ao seu autocuidado.";
+                lista.innerHTML += "<li>Converse com alguém de confiança sobre o que sente</li>";
+                lista.innerHTML += "<li>Busque momentos de pausas conscientes e descanso</li>";
+                lista.innerHTML += "<li>Pratique passatempos que tragam prazer</li>";
+                lista.innerHTML += "<li>Tente manter uma rotina equilibrada e leve</li>";
+            } else {
+                textoDiagnostico.innerHTML = "<strong>Seu resultado indica que você pode estar enfrentando um período de maior sobrecarga emocional.</strong><br>Cuidado recomendado: considere buscar o apoio de um profissional de saúde mental.";
+                lista.innerHTML += "<li>Converse com familiares ou amigos próximos</li>";
+                lista.innerHTML += "<li>Busque apoio psicológico especializado</li>";
+                lista.innerHTML += "<li>Lembre-se de que você não precisa enfrentar tudo sozinho(a)</li>";
+            }
+            
+            caixa.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
