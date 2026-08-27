@@ -1,6 +1,6 @@
-/* Importando a mesma fonte da página inicial */
-@import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
+/* Reset e Estilos Globais do Corpo */
 body {
     margin: 0;
     padding: 0;
@@ -9,12 +9,11 @@ body {
     background: linear-gradient(135deg, #071310 0%, #0c1a25 100%);
     background-attachment: fixed;
     color: #f1f5f9;
+    text-align: left;
+    width: 100%;
     overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
-/* Animação idêntica de surgimento */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -26,29 +25,74 @@ body {
     }
 }
 
-/* Cabeçalho Flutuante Reaproveitado */
+/* Cabeçalho Flutuante Moderno */
 .cabecalho {
-    position: fixed;
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     background: rgba(7, 19, 16, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    padding: 20px 0;
-    text-align: center;
-    z-index: 1000;
+    padding: 18px 0;
+    z-index: 1000; 
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.4s ease-in-out; 
+}
+
+.cabecalho.cabecalho-escondido {
+    transform: translateY(-100%);
+}
+
+/* Container do Cabeçalho com Posicionamento Relativo */
+.cabecalho-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+/* Estilização da Logo com Animação de Zoom */
+.logo {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    z-index: 2;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.08);
+}
+
+.logo span {
+    color: #4ade80;
+}
+
+/* Menu de Navegação Centralizado */
+.navegacao {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
 }
 
 .navegacao a {
     position: relative;
     color: #94a3b8;
     text-decoration: none;
-    margin: 0 25px;
+    margin: 0;
     font-weight: 500;
-    font-size: 1.1em;
-    display: inline-block;
+    font-size: 1.05em;
+    display: inline-block;        
     transition: color 0.3s ease;
 }
 
@@ -65,7 +109,7 @@ body {
     height: 2px;
     background: #4ade80;
     border-radius: 2px;
-    transform: translateX(-50%);
+    transform: translateX(-50%);     
     transition: width 0.3s ease;
 }
 
@@ -73,26 +117,26 @@ body {
     width: 100%;
 }
 
-/* Posicionamento do Box Central */
+/* Estrutura Principal da Seção Sobre */
 .sobre-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 140px 20px 60px 20px;
+    max-width: 950px;
+    margin: 140px auto 60px auto;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
     animation: fadeIn 1s ease-out;
 }
 
-/* Estrutura interna combinando com as abas "mental" e "física" */
+/* Box Principal (Mesmo Estilo do Form de Saúde Física e Mental) */
 .sobre-box {
-    background: rgba(15, 23, 42, 0.6);
-    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    max-width: 950px;
-    width: 100%;
-    padding: 50px;
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 24px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
+    box-sizing: border-box;
+} 
 
 /* Elementos do Cabeçalho Interno */
 .ods3-header {
@@ -104,40 +148,38 @@ body {
     display: inline-block;
     background: rgba(74, 222, 128, 0.1);
     color: #4ade80;
-    padding: 6px 16px;
+    padding: 5px 14px;
     border-radius: 50px;
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     border: 1px solid rgba(74, 222, 128, 0.2);
 }
 
 .ods3-header h1 {
-    font-size: 2.5em;
+    font-size: 2.2em;
     color: #ffffff;
     margin-bottom: 15px;
     font-weight: 700;
 }
 
-/* Efeito da primeira letra colorida */
 .destaque-letra {
     color: #4ade80;
 }
 
 .subtitle {
-    font-size: 1.1em;
+    font-size: 1em;
     color: #94a3b8;
     line-height: 1.6;
     max-width: 650px;
     margin: 0 auto;
 }
 
-/* Alinhamento dos cards internos */
+/* Grid de Cards */
 .ods3-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 25px;
 }
 
 @media (max-width: 768px) {
@@ -146,46 +188,46 @@ body {
     }
 }
 
-/* Customização dos Cards Internos com borda verde */
 .ods3-card {
-    background: rgba(255, 255, 255, 0.02);
-    padding: 30px;
-    border-radius: 14px;
-    border-left: 4px solid #4ade80; /* Borda verde neon idêntica */
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    border-right: 1px solid rgba(255, 255, 255, 0.03);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    background: rgba(30, 41, 59, 0.6);
+    padding: 25px;
+    border-radius: 16px;
+    border-left: 4px solid #4ade80;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .ods3-card h2 {
     color: #ffffff;
-    font-size: 1.4em;
-    margin-bottom: 15px;
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 12px;
     font-weight: 600;
 }
 
 .ods3-card p {
-    color: #94a3b8;
+    color: #cbd5e1;
     line-height: 1.6;
-    font-size: 0.98em;
+    font-size: 0.95em;
+    margin: 0;
 }
 
-/* Customização da Lista */
 .ods3-lista {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .ods3-lista li {
-    color: #94a3b8;
-    font-size: 0.98em;
-    line-height: 1.6;
-    margin-bottom: 12px;
+    color: #cbd5e1;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 10px;
     position: relative;
-    padding-left: 22px;
+    padding-left: 20px;
 }
 
-/* Ícone de check sutil puxando o verde */
 .ods3-lista li::before {
     content: "✓";
     color: #4ade80;
@@ -194,12 +236,12 @@ body {
     left: 0;
 }
 
-/* Rodapé Padrão */
+/* Rodapé */
 .rodape {
     text-align: center;
     padding: 30px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     color: #64748b;
     font-size: 0.9em;
-    margin-top: auto;
+    margin-top: 60px;
 }

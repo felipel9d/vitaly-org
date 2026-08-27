@@ -4,40 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - ODS 3</title>
+    <!-- Caminho corrigido para a pasta css -->
     <link rel="stylesheet" href="/css/sobre.css" />
 </head>
 <body>
     <!-- Cabeçalho de Navegação Flutuante -->
     <header class="cabecalho">
-        <div class="navegacao">
-            <a href="index.html">início</a>
-            <a href="mental.html">mental</a>
-            <a href="fisica.html">física</a>
-            <a href="sobre.html" class="ativo">sobre</a>
+        <div class="cabecalho-container">
+            <a href="index.html" class="logo">
+                Vitality<span>Org</span>
+            </a>
+            <nav class="navegacao">
+                <a href="index.html">início</a>
+                <a href="mental.html">mental</a>
+                <a href="fisica.html">física</a>
+                <a href="sobre.html" class="ativo">sobre</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Container Principal Alinhado com a Hero Section -->
+    <!-- Container Principal com Card Escuro e Grid -->
     <main class="sobre-section">
         <div class="sobre-box">
             
-            <!-- Cabeçalho Interno -->
             <div class="ods3-header">
                 <span class="tag-ods">ODS 3 • Sobre</span>
                 <h1><span class="destaque-letra">S</span>aúde e Bem-Estar</h1>
                 <p class="subtitle">Garantir o acesso à saúde de qualidade e promover o bem-estar para todos, em todas as idades.</p>
             </div>
 
-            <!-- Grid de Conteúdo Lado a Lado (Igual à imagem anterior) -->
             <div class="ods3-grid">
-                
-                <!-- Card Esquerdo -->
                 <div class="ods3-card">
                     <h2>O que é?</h2>
                     <p>Uma meta global da ONU para reduzir a mortalidade materna e infantil, combater epidemias (como HIV e malária) e garantir o acesso universal a serviços de saúde física e mental.</p>
                 </div>
 
-                <!-- Card Direito -->
                 <div class="ods3-card">
                     <h2>Metas Principais</h2>
                     <ul class="ods3-lista">
@@ -47,15 +48,28 @@
                         <li>Alcançar a cobertura universal de saúde.</li>
                     </ul>
                 </div>
-
             </div>
 
         </div>
     </main>
 
-    <!-- Rodapé Padrão -->
     <footer class="rodape">
         <p>ODS 3 - Saúde e Bem-Estar para um mundo sustentável.</p>
     </footer>
+
+    <script>
+        let ultimoScroll = 0;
+        window.addEventListener('scroll', () => {
+            const cabecalho = document.querySelector('.cabecalho');
+            if (!cabecalho) return;
+            const scrollAtual = window.pageYOffset;
+            if (scrollAtual > ultimoScroll && scrollAtual > 100) {
+                cabecalho.classList.add('cabecalho-escondido');
+            } else if (scrollAtual < ultimoScroll) {
+                cabecalho.classList.remove('cabecalho-escondido');
+            }
+            ultimoScroll = scrollAtual;
+        });
+    </script>
 </body>
 </html>

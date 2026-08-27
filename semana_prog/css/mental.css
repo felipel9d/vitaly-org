@@ -5,10 +5,8 @@ body {
     padding: 0;
     font-family: 'Plus Jakarta Sans', sans-serif;
     min-height: 100vh;
-    
     background: linear-gradient(135deg, #071310 0%, #0c1a25 100%);
     background-attachment: fixed;
-
     color: #f1f5f9;
     text-align: left;
     width: 100%;
@@ -35,8 +33,7 @@ body {
     background: rgba(7, 19, 16, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    padding: 20px 0;
-    text-align: center;
+    padding: 18px 0;
     z-index: 1000; 
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: transform 0.4s ease-in-out; 
@@ -46,13 +43,54 @@ body {
     transform: translateY(-100%);
 }
 
+/* Container do Cabeçalho com Posicionamento Relativo */
+.cabecalho-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+/* Estilização da Logo com Animação de Zoom ao passar o mouse */
+.logo {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    z-index: 2;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.08);
+}
+
+.logo span {
+    color: #4ade80;
+}
+
+/* Menu de Navegação perfeitamente Centralizado */
+.navegacao {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+}
+
 .navegacao a {
     position: relative;
     color: #94a3b8;
     text-decoration: none;
-    margin: 0 25px;
+    margin: 0;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1.05em;
     display: inline-block;        
     transition: color 0.3s ease;
 }

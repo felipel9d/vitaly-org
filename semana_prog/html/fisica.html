@@ -10,11 +10,16 @@
     
     <!-- Cabeçalho de Navegação Flutuante -->
     <header class="cabecalho">
-        <div class="navegacao">
-            <a href="index.html">início</a>
-            <a href="mental.html">mental</a>
-            <a href="fisica.html">física</a>
-            <a href="sobre.html">sobre</a>
+        <div class="cabecalho-container">
+            <a href="index.html" class="logo">
+                Vitality<span>Org</span>
+            </a>
+            <nav class="navegacao">
+                <a href="index.html">início</a>
+                <a href="mental.html">mental</a>
+                <a href="fisica.html" class="ativo">física</a>
+                <a href="sobre.html">sobre</a>
+            </nav>
         </div>
     </header>
 
@@ -207,7 +212,7 @@
                 textoIMC += "<br><br><strong>Hidratação:</strong> Sua hidratação parece estar presente na rotina.";
                 pontuacao += 1;
             } else {
-                textoIMC += "<br><br><strong>Hidratação:</strong> Sua hidratação pode merecer mais atenção. Tente beber água regularmente.";
+                textoIMC += "<br><br><strong>Hidratação:</strong> Sua hidratação pode merecer mais atenção. Tente beber água regularly.";
                 recomendacoes.push("Procure beber pelo menos 6 a 8 copos de água por dia.");
             }
             
