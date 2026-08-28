@@ -46,8 +46,9 @@ body {
     padding: 0 30px;
     display: flex;
     align-items: center;
-    position: relative; /* Permite posicionar o menu exatamente no meio do container */
+    position: relative;
     justify-content: flex-start;
+    box-sizing: border-box;
 }
 
 /* Estilização da Logo "Vitality Org" */
